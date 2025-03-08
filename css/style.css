@@ -1,0 +1,231 @@
+/* General Body Styling */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f6f8;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    position: relative; /* Ensures the video stays in place behind the content */
+}
+
+/* Background Video */
+#bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the video covers the entire screen */
+    z-index: -1; /* Puts the video behind the content */
+}
+
+/* Main Upgrade Container (Split View) */
+.upgrade-container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    height: 80vh;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 20px;
+    position: relative; /* Ensures content is on top of the video */
+}
+
+/* Left Side: Upgrade Features and Message */
+.left-side {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.secure-icon {
+    width: 50px;
+    margin-bottom: 15px;
+}
+
+h2 {
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.upgrade-message {
+    font-size: 1rem;
+    color: #f1f1f1;
+    margin-bottom: 20px;
+    font-weight: 400;
+    max-width: 550px;
+    line-height: 1.6;
+}
+
+.upgrade-settings {
+    margin-top: 20px;
+    font-size: 1rem;
+    text-align: left;
+    width: 100%;
+}
+
+.upgrade-settings h3 {
+    font-size: 1.3rem;
+    color: #f1f1f1;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.features-list {
+    display: flex;
+    justify-content: space-between;
+}
+
+.features-column {
+    width: 48%;
+}
+
+.features-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.features-column li {
+    font-size: 1rem;
+    color: #f1f1f1;
+    margin-bottom: 10px;
+}
+
+.secure-note {
+    font-size: 0.95rem;
+    color: #f1f1f1;
+    margin-top: 15px;
+}
+
+/* Right Side: Login Form and Branding */
+.right-side {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+
+/* Branding Box */
+.branding {
+    display: none;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin: 20px 0;
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+    flex-shrink: 0;
+}
+
+.branding img.provider-logo {
+    width: 45px;
+    height: auto;
+    margin-bottom: 10px;
+    object-fit: contain;
+}
+
+.branding h3 {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Input Fields */
+input[type="email"], input[type="password"] {
+    width: 85%;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    color: #333;
+    transition: border-color 0.3s ease;
+}
+
+input[type="email"]:focus, input[type="password"]:focus {
+    outline: none;
+    border-color: #4285F4;
+}
+
+/* Remember Me & Forgot Password */
+.checkbox-container {
+    display: flex;
+    justify-content: space-between;
+    width: 85%;
+    margin: 12px 0;
+}
+
+.forgot-password {
+    font-size: 1rem;
+    color: #4285F4;
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+button {
+    width: 85%;
+    padding: 12px;
+    background-color: #4285F4;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #357ae8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .upgrade-container {
+        flex-direction: column;
+        height: auto;
+        padding: 15px;
+    }
+
+    .left-side, .right-side {
+        flex: unset;
+        width: 100%;
+    }
+
+    .features-list {
+        flex-direction: column;
+    }
+
+    input[type="email"], input[type="password"], button {
+        width: 100%;
+    }
+
+    .secure-icon {
+        width: 40px;
+    }
+
+    .branding img.provider-logo {
+        width: 40px;
+    }
+}

